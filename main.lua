@@ -605,6 +605,7 @@ if countof == 1 then
 			sk.Visible = true
 		end
 	end
+	print(tostring(countof))
 end
 
 local activen = false
