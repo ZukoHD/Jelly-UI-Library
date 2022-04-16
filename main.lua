@@ -239,7 +239,7 @@ function library:CreateWindow(title, subtitle)
 		ScrollingFrame.CanvasSize = UDim2.new(0, 0, 5, 0)
 		ScrollingFrame.ScrollBarThickness = 8
 		ScrollingFrame.BorderSizePixel = 0
-		ScrollingFrame.Visible = true
+		ScrollingFrame.Visible = false
 
 		UICorner.CornerRadius = UDim.new(0, 4)
 		UICorner.Parent = ScrollingFrame
