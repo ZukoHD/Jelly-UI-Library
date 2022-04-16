@@ -1,6 +1,5 @@
 local library = {}
-local name
-local countof = 0
+local countof = 1
 
 function library:CreateWindow(title, subtitle)
 	for i,v in pairs(game.CoreGui:GetChildren()) do
@@ -8,8 +7,7 @@ function library:CreateWindow(title, subtitle)
 			v:Destroy()
 		end
 	end
-	name = title
-	
+
 	local ScreenGui = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
@@ -29,14 +27,16 @@ function library:CreateWindow(title, subtitle)
 	ScreenGui.Parent = game.CoreGui
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	ScreenGui.ResetOnSpawn = false
+	
+	_G.NAME = ScreenGui.Name
 
 	Main.Name = "Main"
 	Main.Parent = ScreenGui
 	Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	Main.Position = UDim2.new(0.166396111, 0, 0.161137447, 0)
 	Main.Size = UDim2.new(0, 699, 0, 407)
-	
-	
+
+
 
 	UICorner.CornerRadius = UDim.new(0, 4)
 	UICorner.Parent = Main
@@ -107,7 +107,7 @@ function library:CreateWindow(title, subtitle)
 
 	UICorner_4.CornerRadius = UDim.new(0, 4)
 	UICorner_4.Parent = Content
-	
+
 	local UIS = game:GetService("UserInputService")
 	function dragify(Frame)
 		dragToggle = nil
@@ -145,7 +145,7 @@ function library:CreateWindow(title, subtitle)
 	end
 
 	dragify(Main)
-	
+
 	local shadowHolder = Instance.new("Frame")
 	local umbraShadow = Instance.new("ImageLabel")
 	local penumbraShadow = Instance.new("ImageLabel")
@@ -191,25 +191,26 @@ function library:CreateWindow(title, subtitle)
 	ambientShadow.ImageTransparency = 0.880
 	ambientShadow.ScaleType = Enum.ScaleType.Slice
 	ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-	
+
 	local windowlib = {}
-	
+
 	function windowlib:EditTitle(title)
 		ScreenGui.Name = title
 		Title.Text = title
 	end
-	
+
 	function windowlib:EditSubTitle(title)
 		Subtitle.Text = title
 	end
-	
+
 	function windowlib:Destroy()
 		ScreenGui:Destroy()
 	end
-	
+
 	local active = false
 	function windowlib:CreateTab(title)
-		countof = countof+1
+		countof = countof + 1
+		
 		active = true
 		local TextButton = Instance.new("TextButton")
 		local UICorner = Instance.new("UICorner")
@@ -254,7 +255,7 @@ function library:CreateWindow(title, subtitle)
 		UIPadding.PaddingBottom = UDim.new(0, 5)
 		UIPadding.PaddingLeft = UDim.new(0, 10)
 		UIPadding.PaddingTop = UDim.new(0, 10)
-		
+
 		TextButton.MouseButton1Click:Connect(function()
 			if active ~= true then
 				active = true
@@ -269,12 +270,12 @@ function library:CreateWindow(title, subtitle)
 				end
 			end
 		end)
-		
+
 		local tablib = {}
-		
+
 		function tablib:CreateButton(title, callback)
 			local buttonlib = {}
-			
+
 			local TextButton = Instance.new("TextButton")
 			local Click = Instance.new('Sound')
 			local UICorner = Instance.new("UICorner")
@@ -289,29 +290,29 @@ function library:CreateWindow(title, subtitle)
 			TextButton.TextSize = 20.000
 			TextButton.Text = title
 			TextButton.TextWrapped = true
-			
+
 			Click.Name = 'Click'
 			Click.Parent = TextButton
 			Click.SoundId = 'rbxassetid://6324790483'
 
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = TextButton
-			
+
 			TextButton.MouseButton1Click:Connect(function()
 				Click:Play()
 				callback()
 			end)
-			
+
 			function buttonlib:EditName(name)
 				TextButton.Name = name
 				TextButton.Text = name
 			end
 			return buttonlib
 		end
-		
+
 		function tablib:CreateTextBox(text, defaulttext, callback)
 			local boxlib = {}
-			
+
 			local Frame = Instance.new("Frame")
 			local UICorner = Instance.new("UICorner")
 			local Title = Instance.new("TextLabel")
@@ -339,7 +340,7 @@ function library:CreateWindow(title, subtitle)
 			Title.TextSize = 20.000
 			Title.Text = text
 			Title.TextXAlignment = Enum.TextXAlignment.Left
-			
+
 			TextBox.Name = text
 			TextBox.Parent = Frame
 			TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -360,27 +361,27 @@ function library:CreateWindow(title, subtitle)
 			UIPadding.PaddingBottom = UDim.new(0, 1)
 			UIPadding.PaddingLeft = UDim.new(0, 3)
 			UIPadding.PaddingTop = UDim.new(0, 2)
-			
+
 			TextBox.FocusLost:Connect(function(enterPressed)
 				if enterPressed then
 					callback(TextBox.Text)
 				end
 			end)
-			
+
 			function boxlib:EditName(name)
 				TextBox.Name = name
 				TextBox.Text = name
 			end
-			
+
 			function boxlib:EditDefaultText(name)
 				TextBox.PlaceholderText = name
 			end
 			return boxlib
 		end
-		
+
 		function tablib:CreateLabel(title)
 			local labellib = {}
-			
+
 			local TextButton = Instance.new("TextButton")
 			local UICorner = Instance.new("UICorner")
 
@@ -397,15 +398,15 @@ function library:CreateWindow(title, subtitle)
 
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = TextButton
-			
+
 			function labellib:EditName(name)
 				TextButton.Name = name
 				TextButton.Text = name
 			end
-			
+
 			return labellib
 		end
-		
+
 		function tablib:CreateSlider(title, minval, maxval, callback)
 			local Frame = Instance.new("Frame")
 			local UICorner = Instance.new("UICorner")
@@ -463,7 +464,7 @@ function library:CreateWindow(title, subtitle)
 
 			UICorner_3.CornerRadius = UDim.new(0, 4)
 			UICorner_3.Parent = Fill
-			
+
 			local UserInputService = game:GetService("UserInputService")
 			local Dragging = false
 			TextButton.MouseButton1Down:Connect(function()
@@ -489,10 +490,10 @@ function library:CreateWindow(title, subtitle)
 				end
 			end)
 		end
-		
+
 		function tablib:CreateToggle(title, callback)
 			local togglelib = {}
-			
+
 			local Frame = Instance.new("Frame")
 			local UICorner = Instance.new("UICorner")
 			local Title = Instance.new("TextLabel")
@@ -538,7 +539,7 @@ function library:CreateWindow(title, subtitle)
 			TextButton.Text = " "
 			TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 			TextButton.TextSize = 14.000
-			
+
 			ToggleS.Name = 'ToggleS'
 			ToggleS.Parent = Frame
 			ToggleS.SoundId = 'rbxassetid://1722389642'
@@ -548,15 +549,15 @@ function library:CreateWindow(title, subtitle)
 
 			UICorner_3.CornerRadius = UDim.new(0, 4)
 			UICorner_3.Parent = holder
-			
-			
+
+
 			local toggle = false
 			TextButton.MouseButton1Click:Connect(function()
 				if toggle == false then
 					toggle = true
 					TextButton.BackgroundColor3 = Color3.fromRGB(0, 255)
 					TextButton.Position = UDim2.new(-0.008, 0,0, 0)
-					
+
 					local tween1 = TextButton:TweenPosition(UDim2.new(0.483, 0,0, 0),
 						Enum.EasingDirection.Out, Enum.EasingStyle.Sine, 2, true)
 				else
@@ -567,22 +568,22 @@ function library:CreateWindow(title, subtitle)
 					local tween1 = TextButton:TweenPosition(UDim2.new(-0.008, 0,0, 0),
 						Enum.EasingDirection.Out, Enum.EasingStyle.Sine, 2, true)
 				end
-				
+
 				ToggleS:Play()
 				callback(toggle)
 			end)
-			
+
 			function togglelib:EditName(name)
 				Frame.Name = name
 				Title.Text = name
 			end
 			return togglelib
 		end
-		
-		
+
+
 		return tablib
 	end
-	
+
 	function windowlib:StartPage(name)
 		if Content:FindFirstChild(name) then
 			for i,v in pairs(Content:GetChildren()) do
@@ -596,27 +597,29 @@ function library:CreateWindow(title, subtitle)
 		end
 	end
 	
+
+	if countof == 1 then
+		for _,sk in pairs(Content:GetChildren()) do
+			if sk:IsA('ScrollingFrame') then
+				sk.Visible = true
+			end
+		end
+	end
+
 	return windowlib
 end
 
-if countof == 1 then
-	for _,sk in pairs(game.CoreGui[name].Main.Content:GetChildren()) do
-		if sk:IsA('ScrollingFrame') then
-			sk.Visible = true
-		end
-	end
-	print(tostring(countof))
-end
+print(countof)
 
 local activen = false
 function library:Notify(title, text, duration)
 	if activen == true then
-		game.CoreGui[name].Notification:Destroy()
+		game.CoreGui[_G.NAME].Notification:Destroy()
 		activen = true
 	else
 		activen = true
 	end
-	
+
 	local Notification = Instance.new("Frame")
 	local Sound = Instance.new('Sound')
 	local Title = Instance.new("TextLabel")
@@ -629,11 +632,11 @@ function library:Notify(title, text, duration)
 	local ambientShadow = Instance.new("ImageLabel")
 
 	Notification.Name = "Notification"
-	Notification.Parent = game.CoreGui[name]
+	Notification.Parent = game.CoreGui[_G.NAME]
 	Notification.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	Notification.Position = UDim2.new(0.009, -241,0.872, 0)
 	Notification.Size = UDim2.new(0, 229, 0, 54)
-	
+
 	Sound.Name = 'Notification'
 	Sound.Parent = Notification
 	Sound.SoundId = 'rbxassetid://5568992074'
@@ -726,9 +729,9 @@ function library:Notify(title, text, duration)
 
 	local tween1 = Notification:TweenPosition(UDim2.new(0.00892857183, 0, 0.872037888, 0),
 		Enum.EasingDirection.Out, Enum.EasingStyle.Quart, 2, true)
-	
+
 	wait(duration)
-	
+
 	local tween2 = Notification:TweenPosition(UDim2.new(0.009, -241,0.872, 0),
 		Enum.EasingDirection.In, Enum.EasingStyle.Quart, 2, true)
 end
