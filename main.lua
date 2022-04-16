@@ -598,6 +598,7 @@ function library:CreateWindow(title, subtitle)
 end
 
 local activen = false
+local countof = 0
 function library:Notify(title, text, duration)
 	if activen == true then
 		game.CoreGui[name].Notification:Destroy()
@@ -605,6 +606,8 @@ function library:Notify(title, text, duration)
 	else
 		activen = true
 	end
+	
+	countof = countof+1
 	
 	local Notification = Instance.new("Frame")
 	local Sound = Instance.new('Sound')
@@ -721,5 +724,12 @@ function library:Notify(title, text, duration)
 	local tween2 = Notification:TweenPosition(UDim2.new(0.009, -241,0.872, 0),
 		Enum.EasingDirection.In, Enum.EasingStyle.Quart, 2, true)
 	
+	if countof == 1 then
+		for _,sk in pairs(game.CoreGui[title].Main.Content:GetChildren()) do
+			if sk:IsA('ScrollingFrame') then
+				sk.Visible = true
+			end
+		end
+	end
 end
 return library
