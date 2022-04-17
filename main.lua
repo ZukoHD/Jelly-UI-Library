@@ -379,7 +379,7 @@ function library:CreateWindow(title, subtitle)
 			return boxlib
 		end
 
-		function tablib:CreateLabel(title, Color)
+		function tablib:CreateLabel(title, bgcolor, txtcolor)
 			local labellib = {}
 
 			local TextButton = Instance.new("TextButton")
@@ -387,11 +387,11 @@ function library:CreateWindow(title, subtitle)
 
 			TextButton.Name = title
 			TextButton.Parent = ScrollingFrame
-			TextButton.BackgroundColor3 = Color or Color3.fromRGB(0, 0, 0)
+			TextButton.BackgroundColor3 = bgcolor or Color3.fromRGB(0, 0, 0)
 			TextButton.Position = UDim2.new(0.0152149275, 0, 0.00496978825, 0)
 			TextButton.Size = UDim2.new(0, 432, 0, 34)
 			TextButton.Font = Enum.Font.Gotham
-			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextButton.TextColor3 = txtcolor or Color3.fromRGB(255, 255, 255)
 			TextButton.TextSize = 20.000
 			TextButton.Text = title
 			TextButton.TextWrapped = true
